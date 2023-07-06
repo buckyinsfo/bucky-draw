@@ -58,8 +58,8 @@ const App = () => {
     return (
         <>
             {/* <ThreeSphere  /> */}
-            {/* <ThreeScene /> */}
-            <Stack />
+            <ThreeScene />
+            {/* <Stack /> */}
         </>
     )
     

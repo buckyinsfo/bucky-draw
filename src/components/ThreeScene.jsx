@@ -1,51 +1,55 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const ThreeScene = () => {
   const canvasRef = useRef(null);
+  const controls = useRef(null);
 
   useEffect(() => {
-    // ADD SCENE
-    const sceneInstance = new THREE.Scene();
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    // ADD CAMERA
-    const cameraInstance = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    cameraInstance.position.z = 4;
+    const scene = new THREE.Scene();
 
-    // ADD RENDERER
-    const rendererInstance = new THREE.WebGLRenderer({ antialias: true });
-    rendererInstance.setClearColor("#000000");
-    rendererInstance.setSize(window.innerWidth, window.innerHeight);
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 5;
 
-    canvasRef.current.appendChild(rendererInstance.domElement);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
 
-    // ADD CUBE
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: "#433F81" });
-    const cubeInstance = new THREE.Mesh(geometry, material);
-    sceneInstance.add(cubeInstance);
+    const canvas = canvasRef.current;
+    canvas.appendChild(renderer.domElement);
 
-const animate = () => {
-  requestAnimationFrame(animate);
+    controls.current = new OrbitControls(camera, renderer.domElement);
 
-      // Rotate the sphere
-      cubeInstance.rotation.x += 0.01;
-      cubeInstance.rotation.y += 0.01;
+    const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const sphereMaterial = new THREE.MeshBasicMaterial({ color: "#ff0000", wireframe: true });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    scene.add(sphere);
 
-      // Render the scene with the camera
-      rendererInstance.render(sceneInstance, cameraInstance);
+    const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+    const cubeMaterial = new THREE.MeshBasicMaterial({ color: "#00ff00", wireframe: true });
+    const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    cube.position.x = -2;
+    scene.add(cube);
+
+    const animate = () => {
+      sphere.rotation.x += 0.01;
+      sphere.rotation.y += 0.01;
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      renderer.render(scene, camera);
+
+      requestAnimationFrame(animate);
     };
 
     animate();
 
-    // Clean up
     return () => {
-      rendererInstance.dispose();
+      controls.dispose();
+      canvas.removeChild(renderer.domElement);
     };
   }, []);
 
