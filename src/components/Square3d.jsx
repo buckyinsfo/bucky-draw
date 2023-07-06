@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
-class Square0 extends Component {
+class Square3d extends Component {
     componentDidMount() {
         // scene
         this.scene = new THREE.Scene()
@@ -57,14 +57,4 @@ class Square0 extends Component {
     }
 }
 
-export default Square0;
-
-
-    // var square = new THREE.Geometry()
-	// square.vertices.push( new THREE.Vector3( x1, y1, 0 ) )
-	// square.vertices.push( new THREE.Vector3( x2, y1, 0 ) )
-	// square.vertices.push( new THREE.Vector3( x2, y2, 0 ) )
-	// square.vertices.push( new THREE.Vector3( x1, y2, 0 ) )
-	// square.faces.push( new THREE.Face3( 0, 1, 2 ) )
-	// square.faces.push( new THREE.Face3( 2, 0, 3 ) )
-	// return square
+export default Square3d;
