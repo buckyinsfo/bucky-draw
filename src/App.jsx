@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import { Canvas } from "@react-three/fiber"
 import Cylinder3d from './components/Cylinder3d'
-import Square0 from './components/Square0.jsx'
+import ThreeSphere  from './components/ThreeSphere.jsx'
+import ThreeScene  from './components/ThreeScene.jsx'
 import './style.css'
 
 import { PerspectiveCamera, OrbitControls } from '@react-three/drei'
@@ -56,7 +57,9 @@ const Stack = () => {
 const App = () => {
     return (
         <>
-            <Square0 />
+            {/* <ThreeSphere  /> */}
+            {/* <ThreeScene /> */}
+            <Stack />
         </>
     )
     

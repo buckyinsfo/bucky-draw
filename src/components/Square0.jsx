@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import * as THREE from 'three'
-// import OrbitControls from 'three-orbitcontrols'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
-
 
 class Square0 extends Component {
     componentDidMount() {
